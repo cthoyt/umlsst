@@ -69,8 +69,8 @@ def main(version: Optional[str] = None, force: bool = False):
             <body>
             <h1>UMLS Semantic Types</h1>
             <p>
-            This page was generated from https://github.com/cthoyt/umlsst/ using
-            version {version} and <a href="{url}">{url}</a>.
+            This page was generated from <a href="https://github.com/cthoyt/umlsst/">https://github.com/cthoyt/umlsst/
+            </a> using version {version} and <a href="{url}">{url}</a>.
             </p>
             <table>
             {home_html}
