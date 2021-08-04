@@ -32,9 +32,17 @@ def main(version: Optional[str] = None, force: bool = False):
         force=force,
         read_csv_kwargs=dict(sep='|', header=0, names=["umsst", "sty", "name"]),
     )
-    with DOCS.joinpath('index.html').open('w') as file:
-        print(df.to_html(), file=file)
+
+    home_html = ''
     for umlsst, sty, name in df.values:
+        home_html += dedent(f'''\
+        <tr>
+            <td><a href="/{umlsst}">{umlsst}</a></td>
+            <td>{sty}</td>
+            <td>{name}</td>
+        </tr>
+        ''')
+
         directory = DOCS.joinpath(umlsst)
         directory.mkdir(exist_ok=True, parents=True)
         with directory.joinpath('index.html').open('w') as file:
@@ -43,8 +51,10 @@ def main(version: Optional[str] = None, force: bool = False):
             <body>
             <h1>{umlsst}</h1>
             <dl>
+                <dt>Version</dt>
+                <dd><a href="{url}">{version}</a></dd>
                 <dt>Semantic Type Ontology ID</dt>
-                <dd>{sty}</dd>
+                <dd><a href="http://purl.bioontology.org/ontology/STY/{sty}">{sty}</a></dd>
                 <dt>Semantic Type Ontology Label</dt>
                 <dd>{name}</dd>
             </dl>
@@ -52,6 +62,19 @@ def main(version: Optional[str] = None, force: bool = False):
             </html>
             ''')
             print(content, file=file)
+
+    with DOCS.joinpath('index.html').open('w') as file:
+        content = dedent(f'''\
+            <html lang="en">
+            <body>
+            <h1>UMLS Semantic Types</h1>
+            <table>
+            {home_html}
+            </table>
+            </body>
+            </html>
+            ''')
+        print(content, file=file)
 
 
 if __name__ == '__main__':
