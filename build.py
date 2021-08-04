@@ -37,7 +37,7 @@ def main(version: Optional[str] = None, force: bool = False):
     for umlsst, sty, name in df.values:
         home_html += dedent(f'''\
         <tr>
-            <td><a href="/{umlsst}">{umlsst}</a></td>
+            <td><a href="{umlsst}">{umlsst}</a></td>
             <td>{sty}</td>
             <td>{name}</td>
         </tr>
@@ -68,6 +68,10 @@ def main(version: Optional[str] = None, force: bool = False):
             <html lang="en">
             <body>
             <h1>UMLS Semantic Types</h1>
+            <p>
+            This page was generated from https://github.com/cthoyt/umlsst/ using
+            version {version} and <a href="{url}">{url}</a>.
+            </p>
             <table>
             {home_html}
             </table>
