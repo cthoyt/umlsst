@@ -13,9 +13,14 @@ OUT = DATA.joinpath('table.yml')
 MODULE = pystow.module('umls', 'semantic-types')
 
 
+URL = 'https://lhncbc.nlm.nih.gov/semanticnetwork/download/sn_current.tgz'
+
+
 def get_latest_version(version: Optional[str] = None) -> str:
     return "2018AB" if version is None else version
 
+
+# TODO get data from https://lhncbc.nlm.nih.gov/semanticnetwork/download/sn_current.tgz
 
 def get_url(version: Optional[str] = None) -> str:
     """Get the URL for the specific version."""
